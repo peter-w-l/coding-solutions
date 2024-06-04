@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import java.util.HashMap;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class MaxNumberOfPairsCalculator {
+public final class MaxNumberOfPairsCalculator {
 
     public static int getMaxNumberOfPairsWithSum(int[] nums, int pairSum) {
         var map = new HashMap<Integer, Integer>();
@@ -37,7 +37,7 @@ public class MaxNumberOfPairsCalculator {
                 map.put(num, count);
             }
         }
-        return numOfOperations;
+        return numOfOperations; // time complexity is O(n). Space: O(n);
     }
 
 }

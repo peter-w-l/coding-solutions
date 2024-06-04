@@ -8,22 +8,22 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class MaxNumberOfPairsCalculatorTest {
+class MaxAreaCalculatorTest {
 
     @ParameterizedTest
     @MethodSource
-    void testGetMaxNumberOfPairsWithSum(int[] array, int pairSum, int expected) {
+    void testGetMaxArea(int[] heightArray, int expected) {
         // when
-        int actual = MaxNumberOfPairsCalculator.getMaxNumberOfPairsWithSum(array, pairSum);
+        int actual = MaxAreaCalculator.getMaxArea(heightArray);
 
         // then
         assertThat(actual).isEqualTo(expected);
     }
 
-    private static Stream<Arguments> testGetMaxNumberOfPairsWithSum() {
+    private static Stream<Arguments> testGetMaxArea() {
         return Stream.of(
-                Arguments.of(new int[] {1,2,3,4}, 5, 2),
-                Arguments.of(new int[] {3,1,3,4,3}, 6, 1)
+                Arguments.of(new int[] {1,8,6,2,5,4,8,3,7}, 49),
+                Arguments.of(new int[] {1,1}, 1)
         );
     }
 }

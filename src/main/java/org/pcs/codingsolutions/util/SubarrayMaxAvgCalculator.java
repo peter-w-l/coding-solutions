@@ -19,6 +19,6 @@ public final class SubarrayMaxAvgCalculator {
             maxSum = Math.max(maxSum, sum);
             startIndex++;
         }
-        return (double)maxSum / subarrayLength;
+        return (double)maxSum / subarrayLength; // time complexity is O(n). Space: O(1);
     }
 }
