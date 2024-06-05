@@ -1,8 +1,15 @@
-package org.pcs.codingsolutions.util;
+package org.pcs.codingsolutions.util.slidingwindow;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+/**
+ * Solution for:
+ *
+ * You are given an integer array nums consisting of n elements, and an integer k.
+ *
+ * Find a contiguous subarray whose length is equal to k that has the maximum average value and return this value. Any answer with a calculation error less than 10-5 will be accepted.
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class SubarrayMaxAvgCalculator {
     public static double findMaxAvgInSubarraysWithLength(int[] nums, int subarrayLength) {

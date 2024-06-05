@@ -1,8 +1,9 @@
-package org.pcs.codingsolutions.util;
+package org.pcs.codingsolutions.util.twopointers;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.pcs.codingsolutions.util.twopointers.MaxNumberOfPairsCalculator;
 
 import java.util.stream.Stream;
 

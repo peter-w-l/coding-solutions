@@ -1,20 +1,21 @@
-package org.pcs.codingsolutions.util;
+package org.pcs.codingsolutions.util.twopointers;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.pcs.codingsolutions.util.twopointers.MaxAreaCalculator;
 
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LongestSubarrayAfterDeletingCalculatorTest {
+class MaxAreaCalculatorTest {
 
     @ParameterizedTest
     @MethodSource
-    void testGetMaxArea(int[] array, int expected) {
+    void testGetMaxArea(int[] heightArray, int expected) {
         // when
-        int actual = LongestSubarrayAfterDeletingCalculator.getLongestSubarrayAfterDeletingOne(array);
+        int actual = MaxAreaCalculator.getMaxArea(heightArray);
 
         // then
         assertThat(actual).isEqualTo(expected);
@@ -22,9 +23,8 @@ class LongestSubarrayAfterDeletingCalculatorTest {
 
     private static Stream<Arguments> testGetMaxArea() {
         return Stream.of(
-                Arguments.of(new int[] {1,1,0,1}, 3),
-                Arguments.of(new int[] {0,1,1,1,0,1,1,0,1}, 5),
-                Arguments.of(new int[] {1,1,1}, 2)
+                Arguments.of(new int[] {1,8,6,2,5,4,8,3,7}, 49),
+                Arguments.of(new int[] {1,1}, 1)
         );
     }
 }

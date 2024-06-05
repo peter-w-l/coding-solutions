@@ -1,8 +1,13 @@
-package org.pcs.codingsolutions.util;
+package org.pcs.codingsolutions.util.slidingwindow;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+/**
+ * Solution for:
+ *
+ * Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class MaxConsecutiveOnesCalculator {
     public static int getMaxNumberOfOnesWithFlippingNumber(int[] nums, int flippingLimit) {

@@ -1,8 +1,15 @@
-package org.pcs.codingsolutions.util;
+package org.pcs.codingsolutions.util.slidingwindow;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+/**
+ * Solution for:
+ *
+ * Given a string s and an integer k, return the maximum number of vowel letters in any substring of s with length k.
+ *
+ * Vowel letters in English are 'a', 'e', 'i', 'o', and 'u'.
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class VowelsOfSubstringCalculator {
     public static int getMaxNumberOfVowelsInSubstring(String source, int substringLength) {
