@@ -17,28 +17,21 @@ public final class StringDecoder {
         while (index < source.length()) {
             char current = source.charAt(index);
             if (current == '[') {
-                Integer number = Integer.parseInt(numberPart.toString());
-                numberStack.push(number);
-                numberPart = new StringBuilder();
+                textStack.push(textPart);
+                textPart = new StringBuilder();
             } else if (current == ']') {
                 int number = numberStack.pop();
-                StringBuilder text = textStack.pop(); // prefix
-
-                if (textPart.isEmpty()) { // only prefix exists
-                    text = decodeSubstring(number, text);
-                } else {
-                    text.append(decodeSubstring(number, textPart));
-                }
-
-                textPart = text;
+                StringBuilder prefix = textStack.pop();
+                StringBuilder decodedPartInBrackets = repeatString(textPart, number);
+                textPart = prefix.append(decodedPartInBrackets);
             } else if (Character.isDigit(current)) {
                 numberPart.append(current);
                 while (Character.isDigit(source.charAt(index + 1))) {
                     numberPart.append(source.charAt(index + 1));
                     index ++;
                 }
-                textStack.push(textPart);
-                textPart = new StringBuilder();
+                numberStack.push(Integer.parseInt(numberPart.toString()));
+                numberPart = new StringBuilder();
             } else {
                 textPart.append(current);
             }
@@ -48,10 +41,10 @@ public final class StringDecoder {
         return textPart.toString();
     }
 
-    private static StringBuilder decodeSubstring(int number, StringBuilder part) {
+    private static StringBuilder repeatString(StringBuilder source, int times) {
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < number; i++) {
-            result.append(part);
+        for (int i = 0; i < times; i++) {
+            result.append(source);
         }
         return result;
     }
