@@ -32,7 +32,31 @@ class ListItemsSorterTest {
 
     private static Stream<Arguments> testSortByOddAndEven() {
         return Stream.of(
-                Arguments.of(new int[]{1,2,3,4,5}, new int[]{1, 3, 5, 2, 4})
+                Arguments.of(new int[]{1, 2, 3, 4, 5}, new int[]{1, 3, 5, 2, 4})
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    void testReverse(int[] inputNodeValues, int[] expectedNodeValues) {
+        // given
+        ListNode input = buildListNodes(inputNodeValues);
+        ListNode expected = buildListNodes(expectedNodeValues);
+
+        // when
+        var actual = ListItemsSorter.reverse(input);
+
+        // then
+        var actualNodes = toList(actual);
+        var expectedNodes = toList(expected);
+        assertThat(actualNodes)
+                .containsExactlyElementsOf(expectedNodes);
+    }
+
+    private static Stream<Arguments> testReverse() {
+        return Stream.of(
+                Arguments.of(new int[]{1, 2, 3, 4, 5}, new int[]{5, 4, 3, 2, 1}),
+                Arguments.of(new int[]{1, 2}, new int[]{2, 1})
         );
     }
 
