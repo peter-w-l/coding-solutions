@@ -15,9 +15,9 @@ public final class TreeNodeRootBuilder {
             return null;
         }
 
-        int levelIndex = getlevelIndex(index);
-        int diff = index - levelIndex;
-        int leftIndex = levelIndex + diff * 2 + nodesInLevel;
+        int levelFirstElementIndex = getLevelFirstElementIndex(index);
+        int diff = index - levelFirstElementIndex;
+        int leftIndex = levelFirstElementIndex + (diff * 2) + nodesInLevel;
         TreeNode treeNode = buildTreeNode(tree[index]);
         TreeNode leftLeaf = getTreeNodeForIndex(tree, leftIndex, nodesInLevel * 2);
         TreeNode rightLeaf = getTreeNodeForIndex(tree, leftIndex + 1, nodesInLevel * 2);
@@ -26,8 +26,7 @@ public final class TreeNodeRootBuilder {
         return treeNode;
     }
 
-    private static int getlevelIndex(int index) {
-        // 0 1 3 7
+    private static int getLevelFirstElementIndex(int index) {
         int levelIndex = 0;
         int nextLevelIndex = 0;
         while (nextLevelIndex <= index) {

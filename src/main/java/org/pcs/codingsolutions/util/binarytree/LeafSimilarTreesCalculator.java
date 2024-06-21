@@ -18,29 +18,26 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class LeafSimilarTreesCalculator {
     public static boolean areLeafsSimilar(TreeNode root1, TreeNode root2) {
-        List<Integer> leftTreeLeafs = getLeafs(root1);
-        List<Integer> rightTreeLeafs = getLeafs(root2);
+        List<Integer> firstTreeLeafs = new ArrayList<>();
+        List<Integer> secondTreeLeafs = new ArrayList<>();
 
-        return leftTreeLeafs.equals(rightTreeLeafs);
+        extractLeafs(root1, firstTreeLeafs);
+        extractLeafs(root2, secondTreeLeafs);
+
+        return firstTreeLeafs.equals(secondTreeLeafs); // Time complexity is O(N). Space complexity is O(N).
     }
 
-    private static List<Integer> getLeafs(TreeNode root) {
-        List<Integer> treeLeafs = new ArrayList<>();
-
-        if (root.getLeft() == null && root.getRight() == null) {
-            treeLeafs.add(root.getVal());
-            return treeLeafs;
+    private static void extractLeafs(TreeNode treeNode, List<Integer> treeLeafs) {
+        if (treeNode == null) {
+            return;
         }
 
-        if (root.getLeft() != null) {
-            List<Integer> leftTreeLeafs = getLeafs(root.getLeft());
-            treeLeafs.addAll(leftTreeLeafs);
+        if (treeNode.getLeft() == null && treeNode.getRight() == null) {
+            treeLeafs.add(treeNode.getVal());
+            return;
         }
 
-        if (root.getRight() != null) {
-            List<Integer> rightTreeLeafs = getLeafs(root.getRight());
-            treeLeafs.addAll(rightTreeLeafs);
-        }
-        return treeLeafs;
+        extractLeafs(treeNode.getLeft(), treeLeafs);
+        extractLeafs(treeNode.getRight(), treeLeafs);
     }
 }
