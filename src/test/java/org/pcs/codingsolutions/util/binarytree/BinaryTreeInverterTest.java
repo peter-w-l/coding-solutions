@@ -9,25 +9,27 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class BinaryTreeMaxDepthCalculatorTest {
+class BinaryTreeInverterTest {
 
     @ParameterizedTest
     @MethodSource
-    void testGetMaxDepth(Integer[] tree, int expected) {
+    void testInvertTree(Integer[] tree, Integer[] expectedTree) {
         // given
         TreeNode root = TreeNodeRootBuilder.buildTreeNodeRoot(tree);
+        TreeNode expected = TreeNodeRootBuilder.buildTreeNodeRoot(expectedTree);
 
         // when
-        int actual = BinaryTreeMaxDepthCalculator.getMaxDepth(root);
+        TreeNode actual = BinaryTreeInverter.invertTree(root);
 
         // then
         assertThat(actual).isEqualTo(expected);
     }
 
-    private static Stream<Arguments> testGetMaxDepth() {
+    private static Stream<Arguments> testInvertTree() {
         return Stream.of(
-                Arguments.of(new Integer[]{3, 9, 20, null, null, 15, 7}, 3),
-                Arguments.of(new Integer[]{1, null, 2}, 2)
+                Arguments.of(new Integer[]{4, 2, 7, 1, 3, 6, 9}, new Integer[]{4, 7, 2, 9, 6, 3, 1}),
+                Arguments.of(new Integer[]{2, 1, 3}, new Integer[]{2, 3, 1}),
+                Arguments.of(new Integer[]{}, new Integer[]{})
         );
     }
 }
