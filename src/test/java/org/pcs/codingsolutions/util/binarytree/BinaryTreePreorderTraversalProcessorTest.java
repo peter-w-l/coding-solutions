@@ -10,27 +10,26 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class BinaryTreeInorderTraversalProcessorTest {
-
+class BinaryTreePreorderTraversalProcessorTest {
     @ParameterizedTest
     @MethodSource
-    void testInorderTraversal(Integer[] tree, List<Integer> expected) {
+    void testPreorderTraversal(Integer[] tree, List<Integer> expected) {
         // given
         TreeNode root = TreeNodeRootBuilder.buildTreeNodeRoot(tree);
 
         // when
-        List<Integer> actual = BinaryTreeInorderTraversalProcessor.inorderTraversal(root);
+        List<Integer> actual = BinaryTreePreorderTraversalProcessor.preorderTraversal(root);
 
         // then
         assertThat(actual).isEqualTo(expected);
     }
 
-    private static Stream<Arguments> testInorderTraversal() {
+    private static Stream<Arguments> testPreorderTraversal() {
         return Stream.of(
-                Arguments.of(new Integer[]{1, null, 2, null, null, 3}, List.of(1, 3, 2)),
+
                 Arguments.of(new Integer[]{}, List.of()),
                 Arguments.of(new Integer[]{1}, List.of(1)),
-                Arguments.of(new Integer[]{0, -10, 5, null, -3, null, 9}, List.of(-10, -3, 0, 5, 10))
+                Arguments.of(new Integer[]{1, null, 2, null, null, 3}, List.of(1, 2, 3))
         );
     }
 }

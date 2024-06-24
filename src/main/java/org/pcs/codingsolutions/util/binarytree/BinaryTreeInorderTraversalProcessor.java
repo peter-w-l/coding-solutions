@@ -7,6 +7,10 @@ import org.pcs.codingsolutions.model.TreeNode;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>
+ * Left -> Root -> Right
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class BinaryTreeInorderTraversalProcessor {
     public static List<Integer> inorderTraversal(TreeNode root) {
