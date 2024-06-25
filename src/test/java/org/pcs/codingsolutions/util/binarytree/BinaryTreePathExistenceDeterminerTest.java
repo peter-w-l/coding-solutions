@@ -9,22 +9,22 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class BinaryTreePathSumCalculatorTest {
+class BinaryTreePathExistenceDeterminerTest {
 
     @ParameterizedTest
     @MethodSource
-    void testHasPathSum(Integer[] tree, int pathSum, boolean expected) {
+    void testHasPathWithTargetSum(Integer[] tree, int pathSum, boolean expected) {
         // given
         TreeNode root = TreeNodeRootBuilder.buildTreeNodeRoot(tree);
 
         // when
-        boolean actual = BinaryTreePathSumCalculator.hasPathSum(root, pathSum);
+        boolean actual = BinaryTreePathExistenceDeterminer.hasPathWithTargetSum(root, pathSum);
 
         // then
         assertThat(actual).isEqualTo(expected);
     }
 
-    private static Stream<Arguments> testHasPathSum() {
+    private static Stream<Arguments> testHasPathWithTargetSum() {
         return Stream.of(
                 Arguments.of(new Integer[]{5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1}, 22, true),
                 Arguments.of(new Integer[]{1, 2, 3}, 5, false),

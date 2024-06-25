@@ -12,12 +12,12 @@ import org.pcs.codingsolutions.model.TreeNode;
  * A leaf is a node with no children.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class BinaryTreePathSumCalculator {
-    public static boolean hasPathSum(TreeNode root, int targetSum) {
-        return hasPathSum(root, targetSum, 0);
+public final class BinaryTreePathExistenceDeterminer {
+    public static boolean hasPathWithTargetSum(TreeNode root, int targetSum) {
+        return hasPathWithTargetSum(root, targetSum, 0);
     }
 
-    private static boolean hasPathSum(TreeNode treeNode, int targetSum, int sumSoFar) {
+    private static boolean hasPathWithTargetSum(TreeNode treeNode, int targetSum, int sumSoFar) {
         if (treeNode == null) {
             return false;
         }
@@ -28,7 +28,7 @@ public final class BinaryTreePathSumCalculator {
             return sumWithCurrentNode == targetSum;
         }
 
-        return hasPathSum(treeNode.getRight(), targetSum, sumWithCurrentNode)
-                || hasPathSum(treeNode.getLeft(), targetSum, sumWithCurrentNode);
+        return hasPathWithTargetSum(treeNode.getRight(), targetSum, sumWithCurrentNode)
+                || hasPathWithTargetSum(treeNode.getLeft(), targetSum, sumWithCurrentNode);
     }
 }
