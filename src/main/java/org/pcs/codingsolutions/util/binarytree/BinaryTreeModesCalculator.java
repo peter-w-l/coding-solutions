@@ -1,5 +1,10 @@
 package org.pcs.codingsolutions.util.binarytree;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.UtilityClass;
 import org.pcs.codingsolutions.model.TreeNode;
 
@@ -29,18 +34,19 @@ public class BinaryTreeModesCalculator {
         }
 
         List<Integer> mostFrequentValues = new ArrayList<>();
-        int[] prevValue = new int[]{Integer.MIN_VALUE};
-        int[] prevValueFrequency = new int[]{0};
-        int[] maxFrequencySoFar = new int[]{1}; // in case there are only distinct values
-        inOrderTraversal(root, prevValue, prevValueFrequency, maxFrequencySoFar, mostFrequentValues);
+        var prevValueAndFrequency = TreeNodeValueAndFrequency.builder()
+                .frequency(new Frequency(0))
+                .build();
+        var maxFrequency = new Frequency(1); // in case there are only distinct values
+
+        inOrderTraversal(root, prevValueAndFrequency, maxFrequency, mostFrequentValues);
 
         return mostFrequentValues.stream().mapToInt(Integer::intValue).toArray();
     }
 
     private void inOrderTraversal(TreeNode treeNode,
-                                  int[] prevValue,
-                                  int[] prevValueFrequency,
-                                  int[] maxFrequencySoFar,
+                                  TreeNodeValueAndFrequency prevValueAndFrequency,
+                                  Frequency maxFrequency,
                                   List<Integer> mostFrequentValues) {
         if (treeNode == null) {
             return;
@@ -48,31 +54,54 @@ public class BinaryTreeModesCalculator {
 
         inOrderTraversal(
                 treeNode.getLeft(),
-                prevValue,
-                prevValueFrequency,
-                maxFrequencySoFar,
+                prevValueAndFrequency,
+                maxFrequency,
                 mostFrequentValues);
-        if (treeNode.getVal() == prevValue[0]) { // values here will be ordered as we use in-order traversal method
-            prevValueFrequency[0]++;
-            if (prevValueFrequency[0] == maxFrequencySoFar[0]) {
-                mostFrequentValues.add(prevValue[0]);
-            } else if (prevValueFrequency[0] > maxFrequencySoFar[0]) {
+        if (treeNode.getVal() == prevValueAndFrequency.getValue()) { // values here will be ordered as we use in-order traversal method
+            prevValueAndFrequency.setFrequencyValue(prevValueAndFrequency.getFrequencyValue() + 1);
+            if (prevValueAndFrequency.getFrequencyValue() == maxFrequency.getValue()) {
+                mostFrequentValues.add(prevValueAndFrequency.getValue());
+            } else if (prevValueAndFrequency.getFrequencyValue() > maxFrequency.getValue()) {
                 mostFrequentValues.clear();
-                mostFrequentValues.add(prevValue[0]);
-                maxFrequencySoFar[0] = prevValueFrequency[0];
+                mostFrequentValues.add(prevValueAndFrequency.getValue());
+                maxFrequency.setValue(prevValueAndFrequency.getFrequencyValue());
             }
         } else {
-            prevValue[0] = treeNode.getVal();
-            prevValueFrequency[0] = 1;
-            if (maxFrequencySoFar[0] == 1) { // so far there are only distinct values
-                mostFrequentValues.add(prevValue[0]);
+            prevValueAndFrequency.setValue(treeNode.getVal());
+            prevValueAndFrequency.setFrequencyValue(1);
+            if (maxFrequency.getValue() == 1) { // so far there are only distinct values
+                mostFrequentValues.add(prevValueAndFrequency.getValue());
             }
         }
         inOrderTraversal(
                 treeNode.getRight(),
-                prevValue,
-                prevValueFrequency,
-                maxFrequencySoFar,
+                prevValueAndFrequency,
+                maxFrequency,
                 mostFrequentValues);
+    }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    @Getter
+    @Setter
+    private static class TreeNodeValueAndFrequency {
+        private int value;
+        private Frequency frequency;
+
+        public int getFrequencyValue() {
+            return frequency.getValue();
+        }
+
+        public void setFrequencyValue(int frequencyValue) {
+            frequency.setValue(frequencyValue);
+        }
+    }
+
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    private static class Frequency {
+        private int value;
     }
 }
