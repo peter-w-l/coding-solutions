@@ -28,7 +28,7 @@ public class BinarySearchTreeBalancingPerformer {
         List<Integer> treeValues = new ArrayList<>();
         extractValuesOrdered(root, treeValues);
 
-        return buildBST(treeValues, 0, treeValues.size() - 1);
+        return buildBST(treeValues, 0, treeValues.size() - 1); // Time complexity is O(N). Space complexity is O(N).
     }
 
     private TreeNode buildBST(List<Integer> treeValues, int beginIndexInclusive, int endIndexInclusive) {
