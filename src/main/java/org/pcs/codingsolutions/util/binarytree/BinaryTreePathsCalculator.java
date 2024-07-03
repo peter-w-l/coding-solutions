@@ -20,7 +20,7 @@ import java.util.List;
 @UtilityClass
 public class BinaryTreePathsCalculator {
     public List<String> getAllAvailablePaths(TreeNode root) {
-        StringBuilder rootPath = new StringBuilder(root.getVal());
+        StringBuilder rootPath = new StringBuilder(Integer.toString(root.getVal()));
         if (root.getLeft() == null && root.getRight() == null) {
             return List.of(rootPath.toString());
         }

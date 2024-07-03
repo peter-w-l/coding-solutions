@@ -29,7 +29,7 @@ class BinaryTreePreorderTraversalProcessorTest {
 
                 Arguments.of(new Integer[]{}, List.of()),
                 Arguments.of(new Integer[]{1}, List.of(1)),
-                Arguments.of(new Integer[]{1, null, 2, null, null, 3}, List.of(1, 2, 3))
+                Arguments.of(new Integer[]{1, null, 2, 3}, List.of(1, 2, 3))
         );
     }
 }

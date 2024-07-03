@@ -33,10 +33,10 @@ class MaximumBinaryTreeComposerTest {
                         new Integer[]{6,
                                 3, 5,
                                 null, 2, 0, null,
-                                null,null,null, 1}),
+                                null, 1}),
                 Arguments.of(
                         new int[]{3, 2, 1},
-                        new Integer[]{3, null, 2, null, null, null, 1})
+                        new Integer[]{3, null, 2, null, 1})
         );
     }
 }

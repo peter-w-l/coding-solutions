@@ -27,7 +27,12 @@ class BinaryTreeMinDepthCalculatorTest {
     private static Stream<Arguments> testGetMinDepth() {
         return Stream.of(
                 Arguments.of(new Integer[]{3, 9, 20, null, null, 15, 7}, 2),
-                Arguments.of(new Integer[]{2, null, 3, null, null, null, 4, null, null, null, null, null, null, null, 5, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 6}, 5)
+                Arguments.of(new Integer[]{
+                        2,
+                        null, 3,
+                        null, 4,
+                        null, 5,
+                        null, 6}, 5)
         );
     }
 }

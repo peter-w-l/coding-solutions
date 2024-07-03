@@ -2,38 +2,46 @@ package org.pcs.codingsolutions.util.binarytree;
 
 import org.pcs.codingsolutions.model.TreeNode;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public final class TreeNodeRootBuilder {
     private TreeNodeRootBuilder() {
     }
 
     static TreeNode buildTreeNodeRoot(Integer[] tree) {
-        return getTreeNodeForIndex(tree, 0, 1);
-    }
-
-    private static TreeNode getTreeNodeForIndex(Integer[] tree, int index, int nodesInLevel) {
-        if (index >= tree.length || tree[index] == null) {
+        if (tree.length == 0) {
             return null;
         }
+        Queue<Integer> values = toQueue(tree);
 
-        int levelFirstElementIndex = getLevelFirstElementIndex(index);
-        int diff = index - levelFirstElementIndex;
-        int leftIndex = levelFirstElementIndex + (diff * 2) + nodesInLevel;
-        TreeNode treeNode = buildTreeNode(tree[index]);
-        TreeNode leftLeaf = getTreeNodeForIndex(tree, leftIndex, nodesInLevel * 2);
-        TreeNode rightLeaf = getTreeNodeForIndex(tree, leftIndex + 1, nodesInLevel * 2);
-        treeNode.setLeft(leftLeaf);
-        treeNode.setRight(rightLeaf);
-        return treeNode;
+        TreeNode root = buildTreeNode(values.poll());
+        Queue<TreeNode> levelTreeNodes = new LinkedList<>();
+        levelTreeNodes.offer(root);
+        while (!levelTreeNodes.isEmpty()) {
+            int levelNodesNumber = levelTreeNodes.size();
+            while (levelNodesNumber > 0) {
+                TreeNode treeNode = levelTreeNodes.poll();
+                if (treeNode != null) {
+                    treeNode.setLeft(buildTreeNode(values.poll()));
+                    treeNode.setRight(buildTreeNode(values.poll()));
+                    levelTreeNodes.offer(treeNode.getLeft());
+                    levelTreeNodes.offer(treeNode.getRight());
+                }
+
+                levelNodesNumber--;
+            }
+        }
+
+        return root;
     }
 
-    private static int getLevelFirstElementIndex(int index) {
-        int levelIndex = 0;
-        int nextLevelIndex = 0;
-        while (nextLevelIndex <= index) {
-            levelIndex = nextLevelIndex;
-            nextLevelIndex = nextLevelIndex * 2 + 1;
+    private static Queue<Integer> toQueue(Integer[] array) {
+        Queue<Integer> values = new LinkedList<>();
+        for (Integer value : array) {
+            values.offer(value);
         }
-        return levelIndex;
+        return values;
     }
 
     private static TreeNode buildTreeNode(Integer value) {

@@ -26,7 +26,7 @@ class BinaryTreeModesCalculatorTest {
 
     private static Stream<Arguments> testGetAllModes() {
         return Stream.of(
-                Arguments.of(new Integer[]{1, null, 2, null, null, 2}, new int[]{2}),
+                Arguments.of(new Integer[]{1, null, 2, 2}, new int[]{2}),
                 Arguments.of(new Integer[]{0}, new int[]{0}),
                 Arguments.of(new Integer[]{6, 2, 8, 0, 4, 7, 9, null, null, 2, 6}, new int[]{2, 6}),
                 Arguments.of(new Integer[]{1, null, 2}, new int[]{1, 2})
