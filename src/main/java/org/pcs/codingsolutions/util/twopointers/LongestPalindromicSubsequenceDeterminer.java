@@ -19,6 +19,32 @@ public class LongestPalindromicSubsequenceDeterminer {
     public int longestPalindromeSubseq(String sourceString) {
         int sourceStringLength = sourceString.length();
         char[] sourceStringChars = sourceString.toCharArray();
+        int[] maxLengths = new int[sourceStringLength];
+
+        for (int i = 0; i < sourceStringLength; i++) {
+            maxLengths[i] = 1;
+            int maxLengthBetweenIndexesExclusive = 0; // between i and j
+            for(int j = i - 1; j >=0; j --) {
+                if (sourceStringChars[j] == sourceStringChars[i]) {
+                    int subsequenceLength = Math.max(maxLengthBetweenIndexesExclusive + 2, maxLengths[j]);
+                    maxLengthBetweenIndexesExclusive = Math.max(maxLengths[j], maxLengthBetweenIndexesExclusive);
+                    maxLengths[j] = subsequenceLength;
+                } else {
+                    maxLengthBetweenIndexesExclusive = Math.max(maxLengths[j], maxLengthBetweenIndexesExclusive);
+                }
+            }
+        }
+
+        int max = 1;
+        for (int i = 0; i < sourceStringLength; i++) {
+            max = Math.max(maxLengths[i], max);
+        }
+        return max;
+    }
+
+    public int longestPalindromeSubseqUsingMatrix(String sourceString) {
+        int sourceStringLength = sourceString.length();
+        char[] sourceStringChars = sourceString.toCharArray();
         int[][] results = new int[sourceStringLength][sourceStringLength];
         for (int i = sourceStringLength - 1; i >= 0; i--) {
             results[i][i] = 1; // one character substring is a palindrome as well
