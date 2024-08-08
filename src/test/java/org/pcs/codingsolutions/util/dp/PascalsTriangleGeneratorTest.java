@@ -13,6 +13,25 @@ class PascalsTriangleGeneratorTest {
 
     @ParameterizedTest
     @MethodSource
+    void testGenerateRow(int input, List<Integer> expected) {
+        // when
+        List<Integer> actual = PascalsTriangleGenerator.generateRow(input);
+
+        // then
+        assertThat(actual).containsExactlyElementsOf(expected);
+    }
+
+    private static Stream<Arguments> testGenerateRow() {
+        return Stream.of(
+                Arguments.of(4, List.of(1,4,6,4,1)),
+                Arguments.of(3, List.of(1,3,3,1)),
+                Arguments.of(0, List.of(1)),
+                Arguments.of(1, List.of(1,1))
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource
     void testGenerate(int input, List<List<Integer>> expected) {
         // when
         List<List<Integer>> actual = PascalsTriangleGenerator.generate(input);
