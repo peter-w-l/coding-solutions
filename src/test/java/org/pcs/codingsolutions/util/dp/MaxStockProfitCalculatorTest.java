@@ -20,7 +20,7 @@ class MaxStockProfitCalculatorTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @SuppressWarnings("not used")
+    @SuppressWarnings("unused")
     private static Stream<Arguments> testGetMaxProfit() {
         return Stream.of(
                 Arguments.of(2, new int[]{2, 4, 1}, 2),

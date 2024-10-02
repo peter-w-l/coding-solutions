@@ -8,23 +8,22 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class MaxStockProfitWithFeeCalculatorTest {
+class GridPathCalculatorTest {
 
     @ParameterizedTest
     @MethodSource
-    void testGetMaxProfit(int[] pricesPerDay, int transactionFee, int expected) {
+    void testGetUniquePathNumber(int[][] obstacleGrid, int expected) {
         // when
-        int actual = MaxStockProfitWithFeeCalculator.getMaxProfit(pricesPerDay, transactionFee);
+        int actual = GridPathCalculator.getUniquePathNumber(obstacleGrid);
 
         // then
         assertThat(actual).isEqualTo(expected);
     }
 
     @SuppressWarnings("unused")
-    private static Stream<Arguments> testGetMaxProfit() {
+    private static Stream<Arguments> testGetUniquePathNumber() {
         return Stream.of(
-                Arguments.of(new int[]{1, 3, 2, 8, 4, 9}, 2, 8),
-                Arguments.of(new int[]{1, 3, 7, 5, 10, 3}, 3, 6)
+                Arguments.of(new int[][]{{0, 0, 0}, {0, 1, 0}, {0, 0, 0}}, 2)
         );
     }
 }

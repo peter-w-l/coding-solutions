@@ -20,7 +20,7 @@ class MaxStockProfitWithCooldownCalculatorTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @SuppressWarnings("not used")
+    @SuppressWarnings("unused")
     private static Stream<Arguments> testGetMaxProfit() {
         return Stream.of(
                 Arguments.of(new int[]{1, 2, 3, 0, 2}, 3),
