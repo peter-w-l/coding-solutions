@@ -21,6 +21,9 @@ import java.util.stream.IntStream;
  * 1 <= k <= 100
  * 1 <= prices.length <= 1000
  * 0 <= prices[i] <= 1000
+ * <p>
+ * Solution explanation:
+ * <a href="resources/188_max_stock_profit_calculator_diagram.png"> Diagram with solution explanation</a>
  */
 @UtilityClass
 public class MaxStockProfitCalculator {
