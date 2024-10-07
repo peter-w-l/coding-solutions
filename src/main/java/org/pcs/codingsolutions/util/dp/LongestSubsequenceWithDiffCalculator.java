@@ -21,8 +21,9 @@ import java.util.HashMap;
 public class LongestSubsequenceWithDiffCalculator {
     public int getLongestSubsequenceWithDiff(int[] numbers, int difference) {
         var cache = new HashMap<Integer, Integer>();
+
         for (int number : numbers) {
-            cache.put(number + difference, cache.containsKey(number) ? cache.get(number) + 1 : 1);
+            cache.put(number, cache.getOrDefault(number - difference, 0) + 1);
         }
 
         return cache.values().stream()
